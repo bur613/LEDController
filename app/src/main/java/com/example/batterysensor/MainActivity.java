@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     TextView batteryTxt;
-    private BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver(){
+    public BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver(){
         @Override
         public void onReceive(Context ctxt, Intent intent) {
             int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
@@ -27,9 +27,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        batteryTxt = (TextView) findViewById(R.id.batteryTxt);
         //batteryTxt.setText("Cool");
         this.registerReceiver(this.mBatInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        Process process = Runtime.getRuntime().exec("su -c 'echo 0 > /sys/devices/virtual/android_usb/android0/enable'");
+        // Process process = Runtime.getRuntime().exec("su -c 'echo 0 > /sys/devices/virtual/android_usb/android0/enable'");
     }
 }
