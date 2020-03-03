@@ -3,8 +3,10 @@
           xmlns:dist="http://schemas.android.com/apk/distribution"
           package="com.example.batterysensor">
 
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
     <dist:module dist:instant="true"/>
 
@@ -16,11 +18,11 @@
             android:theme="@style/AppTheme">
         <activity
                 android:name="com.example.batterysensor.SplashScreen"
-                android:label="@string/app_name" >
+                android:label="@string/app_name">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
 
         </activity>
@@ -39,9 +41,27 @@
                 android:name="com.example.batterysensor.AboutActivity"
                 android:label="@string/app_name">
         </activity>
+
+        <!-- Services -->
         <service
                 android:name="com.example.batterysensor.ChargeService">
         </service>
+        <service
+                android:name="com.example.batterysensor.BluetoothService">
+        </service>
+
+        <!-- Receivers -->
+        <receiver
+                android:name="com.example.batterysensor.AlarmReceiver"
+                android:enabled="true"/>
+        <receiver
+                android:name="com.example.batterysensor.BootReceiver"
+                android:enabled="true"
+                android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
